@@ -1,45 +1,62 @@
 <template>
 <div>
-
-  <v-layout :wrap="true">
+  <v-layout :wrap="true" >
     <v-flex xs12>
-      <v-card color="dark" dark>
-        <v-card-text class="display-1">Cotizaciónes brou</v-card-text>
-      </v-card>
+        <p class="display-3" >Cotizaciones BROU </p>
     </v-flex>
   </v-layout>
-  <v-bottom-navigation>
+  <v-bottom-navigation v-model="colorBG" :background-color="color" class="mt-3 py-2">
+  
     <v-btn @click="currency = 'USD'">
-      <span>USD</span>
+      <img
+        src="../assets/001-estados-unidos.png"
+        alt="John"
+      >
     </v-btn>
     <v-btn @click="currency = 'BRL'">
-      <span>BRL</span>
+      <img
+        src="../assets/002-brasil.png"
+        alt="John"
+      >
     </v-btn>
     <v-btn @click="currency = 'EUR'">
-      <span>EUR</span>
+      <img
+        src="../assets/004-union-europea.png"
+        alt="John"
+      >
     </v-btn>
     <v-btn @click="currency = 'ARS'">
-      <span>ARS</span>
+       <img
+        src="../assets/003-argentina.png"
+        alt="John"
+      >
     </v-btn>
   </v-bottom-navigation>
   <v-layout :wrap="true" class="justify-center ma-5">
-     <v-flex xs12>
-     <v-card >
+     <v-flex xs6>
+    
       <v-date-picker 
           v-model="fecha"
+          full-width
           locale="es-MX"
           color="grey"
+          dark
           :max="max"
           :min="min"
           @change="getDolar(fecha)"></v-date-picker>
-     </v-card>
+    
     </v-flex>
   </v-layout>
-   <v-flex xs12>
-      <v-card color="dark" dark>
-        <v-card-text class="display-2"> Venta: $ {{venta}} -- Compra : $ {{compra}}</v-card-text>
+  <v-layout :wrap="true" class="justify-center ma-5">
+   <v-flex xs6>
+      <v-card >
+        <v-card-text class="display-1"> Venta $ {{venta}} </v-card-text>
+        <v-card-text class="display-1">Compra $ {{compra}}</v-card-text>
       </v-card>
     </v-flex>
+    
+  </v-layout>
+    <div class="mt-10">Iconos diseñados por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div><div>Iconos diseñados por <a href="https://www.flaticon.es/autores/kathelynnexx" title="Kathelynnexx">Kathelynnexx</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div>
   </div>
 </template>
 
@@ -58,6 +75,7 @@ export default {
       venta: null,
       compra:null,
       currency:null,
+      colorBG: 0
     }
 
  },
@@ -104,6 +122,17 @@ export default {
     let newFormato = arrayFecha[2] + '-' + arrayFecha[1] + '-' + arrayFecha[0];
     return newFormato;
   }
+ },
+ computed:{
+   color () {
+        switch (this.colorBG) {
+          case 0: return 'red'
+          case 1: return 'light-green lighten-1'
+          case 2: return 'deep-purple darken-4'
+          case 3: return 'blue lighten-3'
+          default: return 'red'
+        }
+   }
  },
  watch:{
   currency:  function(){
