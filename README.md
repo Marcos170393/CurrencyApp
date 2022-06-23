@@ -1,4 +1,4 @@
-# pro-vuetify
+# Currency App
 
 ## Project setup
 ```
