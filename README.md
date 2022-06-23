@@ -1,2 +1,24 @@
-# CurrencyApp
-Una app que permite a través de un calendario, visualizar las cotizaciones del BROU para compra y venta. 
+# pro-vuetify
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
