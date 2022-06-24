@@ -2,7 +2,7 @@
 <div>
   <v-layout :wrap="true" >
     <v-flex xs12>
-        <p class="display-3" >Cotizaciones BROU </p>
+        <p class="display-3" >Currency price BROU </p>
     </v-flex>
   </v-layout>
   <v-bottom-navigation v-model="colorBG" :background-color="color" class="mt-3 py-2">
@@ -56,7 +56,7 @@
     </v-flex>
     
   </v-layout>
-    <div class="mt-10">Iconos diseñados por <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div><div>Iconos diseñados por <a href="https://www.flaticon.es/autores/kathelynnexx" title="Kathelynnexx">Kathelynnexx</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div>
+    
   </div>
 </template>
 
