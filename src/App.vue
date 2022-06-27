@@ -1,13 +1,13 @@
 <template>
   <v-app >
-    <v-navigation-drawer app permanent color="blue" dark>
+    <v-navigation-drawer app color="blue" dark width="300px">
       <v-list-item>
         <v-list-item-content>
           <v-list-item-title class="text-h5">
-            Currency App
+           <v-icon >mdi-currency-btc</v-icon> Currency App
           </v-list-item-title>
           <v-list-item-subtitle>
-            Know Everything
+           Menu
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -54,7 +54,7 @@
          
           <v-card color="dark" dark>
             <v-card-text>
-              {{loading.titulo}}
+              <v-icon >mdi-currency-btc</v-icon> {{loading.titulo}}
               <v-progress-linear
                 indeterminate
                 color="white"

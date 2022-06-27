@@ -50,8 +50,11 @@
   <v-layout :wrap="true" class="justify-center ma-5">
    <v-flex xs6>
       <v-card >
-        <v-card-text class="display-1"> Venta $ {{venta}} </v-card-text>
-        <v-card-text class="display-1">Compra $ {{compra}}</v-card-text>
+      <v-card-subtitle> Venta  </v-card-subtitle>
+        <v-card-text class="display-1"> $ {{venta}} </v-card-text>
+        <v-divider class="mx-4"></v-divider>
+         <v-card-subtitle> Compra  </v-card-subtitle>
+        <v-card-text class="display-1">$ {{compra}}</v-card-text>
       </v-card>
     </v-flex>
     
@@ -83,7 +86,6 @@ export default {
   ...mapMutations(['mostrarLoading','ocultarLoading']),
   async getDolar(dia){
     try {
-      console.log(this.currency);
       this.mostrarLoading({titulo:'Loading data'});
       let datos = await axios.get(`https://cotizaciones-brou.herokuapp.com/api/currency/${dia}`)
       switch (this.currency) {
