@@ -55,41 +55,59 @@ export default {
           currency:"USD",
           maxValue:null,
           minValue:null,
+          lastRequest: null,
+          date: new Date(),
         }
     },
     methods:{
-       ...mapMutations(['mostrarLoading','ocultarLoading']),
-     async getdata(){
-        let start = "2021-01-01";
-        let end = "2022-01-01";
-        let valores = null;
-       
-        // var myHeaders = new Headers();
-        // myHeaders.append("apikey", "");
-      
-        var requestOptions = {
-        method: 'GET',
-        headers:{
-            apikey: "Zdhodlsn42eF0Hpys2dqEQSEswXe9JEu"
-        }
-        };
-        try{
-          
-          this.mostrarLoading({titulo:'Loading data'});
-          let datos = await axios.get(`https://api.apilayer.com/currency_data/timeframe?start_date=${start}&end_date=${end}`,requestOptions);
-          valores = Object.entries(datos.data.quotes); 
-            console.log(valores);
-          valores.forEach(element => {
-              this.value.push(element[1]['USDUYU'])
+        ...mapMutations(['mostrarLoading','ocultarLoading']),
+      async getdata(){
+          let start = "2021-01-01";
+          let end = "2022-01-01";
+          let valores = null;
+          let cache = window.localStorage.getItem('data');
+
+          let cacheRequest = window.localStorage.getItem('lastRequest');
+          // var myHeaders = new Headers();
+          // myHeaders.append("apikey", "");
+        
+          var requestOptions = {
+          method: 'GET',
+          headers:{
+              apikey: "Zdhodlsn42eF0Hpys2dqEQSEswXe9JEu"
           }
-          );
-          this.maxValue = Math.max(...this.value);
-          this.minValue = Math.min(...this.value);
-        }catch(error){
-            //
-        }finally{
-           this.ocultarLoading()
-        }
+          };
+
+          this.mostrarLoading({titulo:'Loading data'});
+          if(cache && this.date.getDate() == cacheRequest){
+            this.loadCache(cache);
+            console.log('Datos cargados desde cache');
+          }else{
+              try{
+                
+                  let datos = await axios.get(`https://api.apilayer.com/currency_data/timeframe?start_date=${start}&end_date=${end}`,requestOptions);
+                  valores = Object.entries(datos.data.quotes); 
+                    
+                  valores.forEach(element => {
+                      this.value.push(element[1]['USDUYU'])
+                  }
+                  );
+                  
+                  window.localStorage.setItem('data',JSON.stringify(valores));
+                  window.localStorage.setItem('lastRequest',this.date.getDate());
+              }catch(error){
+                  //
+              }
+            }
+            this.maxValue = Math.max(...this.value);
+            this.minValue = Math.min(...this.value);
+            this.ocultarLoading()
+        },
+        loadCache(data){
+          let results = JSON.parse(data);
+          results.forEach(element => {
+              this.value.push(element[1]['USDUYU'])
+          });
         }
     },
     mounted(){
